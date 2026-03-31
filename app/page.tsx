@@ -5,7 +5,7 @@ import { COMPANY } from '@/lib/constants'
 export const metadata: Metadata = generatePageMetadata({
   title: 'Roofing & Exterior Contractor Chattanooga TN',
   description:
-    'Tennessee Valley Exteriors — veteran-owned roofing, siding, gutters, and exterior contracting in Chattanooga, TN and North Georgia. Free estimates. Call 423-364-5752.',
+    'Tennessee Valley Exteriors — veteran-owned roofing, siding, gutters, and exterior contracting in Chattanooga, TN and North Georgia. Free estimates. Call 423-762-7728.',
   path: '/',
   keywords: ['roofing contractor Chattanooga TN', 'exterior contractor Chattanooga', 'roof replacement Chattanooga'],
 })
