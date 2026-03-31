@@ -5,6 +5,7 @@ interface JsonLdProps {
 /**
  * Renders a JSON-LD structured data script tag.
  * Pass an array to include multiple schemas on one page.
+ * Sanitizes `<` to prevent XSS injection via JSON-LD payloads.
  */
 export function JsonLd({ schema }: JsonLdProps) {
   const data = Array.isArray(schema)
@@ -14,7 +15,9 @@ export function JsonLd({ schema }: JsonLdProps) {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(data).replace(/</g, '\\u003c'),
+      }}
     />
   )
 }
