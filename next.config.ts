@@ -1,8 +1,9 @@
 import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
-  // Trailing slashes handled by middleware for 301 redirects
-  trailingSlash: false,
+  // Trailing slashes: proxy.ts middleware redirects /path → /path/
+  // Setting true here ensures pages are generated at the slash-suffixed URLs
+  trailingSlash: true,
 
   images: {
     formats: ['image/webp'],

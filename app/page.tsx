@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
-import Script from 'next/script'
 import {
   Phone,
   Shield,
@@ -27,7 +26,8 @@ import {
 } from '@/lib/schema'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { HeroLeadForm } from '@/components/home/HeroLeadForm'
-import { COMPANY, QUOTE_WIDGET_URL } from '@/lib/constants'
+import { QuoteWidgetEmbed } from '@/components/QuoteWidgetEmbed'
+import { COMPANY } from '@/lib/constants'
 
 export const metadata: Metadata = generatePageMetadata({
   title: 'Roofing & Exterior Contractor Chattanooga TN',
@@ -404,40 +404,10 @@ export default function HomePage() {
       </section>
 
       {/* ── Section 4: Quote Widget ───────────────────────────────────────── */}
-      <section className="py-20 bg-white" aria-labelledby="quote-heading">
-        <div className="mx-auto max-w-4xl px-6 md:px-8 text-center">
-          <p className="text-[#2563EB] font-semibold text-sm uppercase tracking-wider mb-3">
-            Instant Pricing
-          </p>
-          <h2 id="quote-heading" className="text-[#0A1628] font-bold text-3xl md:text-4xl mb-4">
-            Get Your Instant Estimate
-          </h2>
-          <p className="text-[#64748B] text-lg mb-10 max-w-xl mx-auto">
-            Answer a few quick questions about your project and get a realistic price range in
-            minutes — no phone call required.
-          </p>
-          <div
-            id="tve-quote-widget"
-            className="rounded-2xl border border-[#E2E8F0] overflow-hidden min-h-[400px] bg-[#F8F9FA] flex items-center justify-center"
-          >
-            <div className="text-center py-12 px-6">
-              <Search size={40} className="text-[#2563EB] mx-auto mb-4" aria-hidden="true" />
-              <p className="text-[#64748B] text-sm mb-4">Loading estimate tool…</p>
-              <Link
-                href="/quote/"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#2563EB] text-white font-semibold text-sm hover:bg-[#1d4ed8] transition-colors min-h-[44px]"
-              >
-                Open Full Estimator <ArrowRight size={15} aria-hidden="true" />
-              </Link>
-            </div>
-          </div>
-          <Script
-            src={`${QUOTE_WIDGET_URL}/embed.js`}
-            strategy="lazyOnload"
-            data-widget="tve-quote-widget"
-          />
-        </div>
-      </section>
+      <QuoteWidgetEmbed
+        heading="Get Your Instant Estimate"
+        subheading="Answer a few quick questions about your project and get a realistic price range in minutes — no phone call required."
+      />
 
       {/* ── Section 5: About Preview ─────────────────────────────────────── */}
       <section className="py-20 bg-[#F8F9FA]" aria-labelledby="about-heading">

@@ -66,17 +66,27 @@ export async function POST(request: NextRequest) {
 
   if (supabaseUrl && supabaseServiceKey) {
     const supabase = createClient(supabaseUrl, supabaseServiceKey)
-    const { error } = await supabase.from('leads').insert({
-      name: payload.name,
-      phone: payload.phone,
-      notes: [payload.service, payload.message].filter(Boolean).join(' — '),
-      source: 'website_hero',
-      status: 'new',
-    })
-
-    if (error) {
-      console.error('Supabase lead insert error:', error.message)
-      // Don't expose DB errors to the client; still acknowledge receipt
+    try {
+      const { error } = await Promise.race([
+        supabase.from('leads').insert({
+          name: payload.name,
+          phone: payload.phone,
+          notes: [payload.service, payload.message].filter(Boolean).join(' — '),
+          source: 'website_hero',
+          status: 'new',
+        }),
+        new Promise<{ data: null; error: Error }>((resolve) =>
+          setTimeout(
+            () => resolve({ data: null, error: new Error('Supabase insert timed out') }),
+            8000,
+          ),
+        ),
+      ])
+      if (error) {
+        console.error('Supabase lead insert error:', error.message)
+      }
+    } catch (err) {
+      console.error('Supabase lead insert exception:', err)
     }
   }
 

@@ -29,18 +29,24 @@ export function HeroLeadForm() {
     if (status === 'submitting') return
     setStatus('submitting')
 
+    const controller = new AbortController()
+    const timeoutId = setTimeout(() => controller.abort(), 15000)
+
     try {
-      const res = await fetch('/api/lead/', {
+      const res = await fetch('/api/lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, phone, service, website: '' }),
+        signal: controller.signal,
       })
+      clearTimeout(timeoutId)
       if (res.ok) {
         setStatus('success')
       } else {
         setStatus('error')
       }
     } catch {
+      clearTimeout(timeoutId)
       setStatus('error')
     }
   }
