@@ -1,20 +1,8 @@
 import type { MetadataRoute } from 'next'
 import { SITE_URL, SERVICES } from '@/lib/constants'
-
-const STATES = ['tennessee', 'georgia']
-const CITIES: Record<string, string[]> = {
-  tennessee: [
-    'chattanooga',
-    'signal-mountain',
-    'lookout-mountain',
-    'red-bank',
-    'hixson',
-    'soddy-daisy',
-    'ooltewah',
-    'cleveland',
-  ],
-  georgia: ['dalton', 'ringgold', 'fort-oglethorpe', 'chickamauga', 'rossville', 'east-ridge'],
-}
+import { getBlogSlugs, BLOG_CATEGORIES } from '@/lib/blog'
+import { MATRIX_CONTENT } from '@/lib/matrixContent'
+import { SERVICE_AREAS, STATES as SERVICE_AREA_STATES } from '@/lib/serviceAreas'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date()
@@ -46,22 +34,53 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }))
 
   // State hub pages
-  const statePages: MetadataRoute.Sitemap = STATES.map((state) => ({
-    url: `${SITE_URL}/service-areas/${state}/`,
+  const statePages: MetadataRoute.Sitemap = SERVICE_AREA_STATES.map((state) => ({
+    url: `${SITE_URL}/service-areas/${state.slug}/`,
     lastModified: now,
     changeFrequency: 'monthly' as const,
     priority: 0.8,
   }))
 
   // City pages
-  const cityPages: MetadataRoute.Sitemap = STATES.flatMap((state) =>
-    (CITIES[state] || []).map((city) => ({
-      url: `${SITE_URL}/service-areas/${state}/${city}/`,
-      lastModified: now,
-      changeFrequency: 'monthly' as const,
-      priority: 0.8,
-    }))
-  )
+  const cityPages: MetadataRoute.Sitemap = SERVICE_AREAS.map((city) => ({
+    url: `${SITE_URL}/service-areas/${city.state}/${city.slug}/`,
+    lastModified: now,
+    changeFrequency: 'monthly' as const,
+    priority: 0.8,
+  }))
 
-  return [...staticPages, ...servicePages, ...statePages, ...cityPages]
+  // Service × city matrix pages
+  const matrixPages: MetadataRoute.Sitemap = MATRIX_CONTENT.map((entry) => ({
+    url: `${SITE_URL}/services/${entry.serviceSlug}/${entry.citySlug}/`,
+    lastModified: now,
+    changeFrequency: 'monthly' as const,
+    priority: 0.75,
+  }))
+
+  // Blog category pages
+  const blogCategoryPages: MetadataRoute.Sitemap = BLOG_CATEGORIES.map((cat) => ({
+    url: `${SITE_URL}/blog/category/${cat.value}/`,
+    lastModified: now,
+    changeFrequency: 'weekly' as const,
+    priority: 0.6,
+  }))
+
+  // Blog post pages
+  const blogSlugs = getBlogSlugs()
+  const blogPostPages: MetadataRoute.Sitemap = blogSlugs.map((slug) => ({
+    url: `${SITE_URL}/blog/${slug}/`,
+    lastModified: now,
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }))
+
+  return [
+    ...staticPages,
+    ...servicePages,
+    ...statePages,
+    ...cityPages,
+    ...matrixPages,
+    ...blogCategoryPages,
+    ...blogPostPages,
+  ]
 }
