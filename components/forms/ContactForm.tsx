@@ -121,7 +121,7 @@ export function ContactForm() {
       setServerError(
         err instanceof Error
           ? err.message
-          : 'Something went wrong. Please call us at 423-364-5752.'
+          : 'Something went wrong. Please call us at 423-762-7728.'
       )
     }
   }

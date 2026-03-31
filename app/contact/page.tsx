@@ -12,7 +12,7 @@ import { ContactForm } from '@/components/forms/ContactForm'
 export const metadata: Metadata = generatePageMetadata({
   title: 'Contact Us | Roofing Contractor Chattanooga TN',
   description:
-    'Contact Tennessee Valley Exteriors for a free roofing estimate in Chattanooga, TN and North Georgia. Call 423-364-5752 or fill out our form — we respond same day.',
+    'Contact Tennessee Valley Exteriors for a free roofing estimate in Chattanooga, TN and North Georgia. Call 423-762-7728 or fill out our form — we respond same day.',
   path: '/contact/',
   keywords: [
     'contact roofing contractor Chattanooga',
