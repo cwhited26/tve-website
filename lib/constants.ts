@@ -4,8 +4,8 @@ export const COMPANY = {
   tagline: "Chattanooga's Trusted Roofing & Exterior Contractor",
   description:
     'Tennessee Valley Exteriors is a veteran-owned roofing and exterior contracting company serving Chattanooga, TN and North Georgia. We specialize in roof replacement, roof repair, gutters, siding, decks, and exterior painting.',
-  phone: '423-364-5752',
-  phoneTel: 'tel:+14233645752',
+  phone: '423-762-7728',
+  phoneTel: 'tel:+14237627728',
   email: 'chase@tnvex.com',
   website: 'https://tnvex.com',
   address: {
