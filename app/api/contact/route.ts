@@ -97,14 +97,14 @@ async function sendGmailConfirmation(
     `Thanks for reaching out to Tennessee Valley Exteriors! We received your message about ${serviceLabel} and will get back to you within one business day — usually the same day.`,
     '',
     `In the meantime, if you need to reach us directly:`,
-    `  Phone: 423-762-7728`,
+    `  Phone: 423-364-5752`,
     `  Email: chase@tnvex.com`,
     '',
     `We appreciate you considering TVE for your project.`,
     '',
     `Chase Whited`,
     `Tennessee Valley Exteriors`,
-    `423-762-7728 | chase@tnvex.com`,
+    `423-364-5752 | chase@tnvex.com`,
     `https://tnvex.com`,
   ].join('\n')
 
@@ -131,7 +131,7 @@ async function sendGmailConfirmation(
           <table cellpadding="0" cellspacing="0" style="background:#f8f9fa;border-radius:8px;padding:16px 20px;margin-bottom:24px;">
             <tr><td style="padding:4px 0;">
               <span style="color:#64748b;font-size:14px;">Phone: </span>
-              <a href="tel:+14237627728" style="color:#2563EB;font-weight:600;font-size:14px;text-decoration:none;">423-762-7728</a>
+              <a href="tel:+14233645752" style="color:#2563EB;font-weight:600;font-size:14px;text-decoration:none;">423-364-5752</a>
             </td></tr>
             <tr><td style="padding:4px 0;">
               <span style="color:#64748b;font-size:14px;">Email: </span>
@@ -226,7 +226,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   if (dbError) {
     console.error('[contact] Supabase insert error:', dbError)
     return NextResponse.json(
-      { error: 'Failed to submit your message. Please call us directly at 423-762-7728.' },
+      { error: 'Failed to submit your message. Please call us directly at 423-364-5752.' },
       { status: 500 }
     )
   }
