@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { Phone, CheckCircle } from 'lucide-react'
 import { generatePageMetadata } from '@/lib/seo'
 import { COMPANY } from '@/lib/constants'
-import { QuoteWidgetEmbed } from '@/components/QuoteWidgetEmbed'
+import { QuoteWizard } from '@/components/quote/QuoteWizard'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { buildLocalBusinessSchema } from '@/lib/seo'
 
@@ -43,11 +43,8 @@ export default function QuotePage() {
         </div>
       </div>
 
-      {/* Widget — full width */}
-      <QuoteWidgetEmbed
-        heading="What Are We Working On?"
-        subheading="Answer a few quick questions. Takes about 2 minutes."
-      />
+      {/* Wizard — full multi-step flow */}
+      <QuoteWizard />
 
       {/* Trust signals below the widget */}
       <div className="bg-white py-12 px-6">

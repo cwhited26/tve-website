@@ -3,19 +3,67 @@
 @theme inline {
   /* TVE Brand Colors */
   --color-navy: #0A1628;
+  --color-navy-mid: #1a3554;
+  --color-navy-light: #1e3a5f;
   --color-blue: #2563EB;
   --color-blue-dark: #1d4ed8;
+  --color-blue-light: #EFF6FF;
+  --color-red: #C0392B;
+  --color-red-dark: #a93226;
+  --color-red-light: #FEF2F2;
   --color-white: #FFFFFF;
   --color-gray-light: #F8F9FA;
+  --color-gray-mid: #F1F5F9;
   --color-slate: #64748B;
   --color-slate-dark: #334155;
   --color-border: #E2E8F0;
   --color-success: #16A34A;
   --color-warning: #F59E0B;
+  --color-gold: #F59E0B;
   --color-error: #DC2626;
 
   /* Typography */
   --font-sans: var(--font-inter);
+
+  /* Animations */
+  --animate-float: float 4s ease-in-out infinite;
+  --animate-pulse-slow: pulseSlow 3s ease-in-out infinite;
+  --animate-spin-slow: spinSlow 20s linear infinite;
+  --animate-shimmer: shimmer 2s linear infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes pulseSlow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes tveFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.tve-fade-in {
+  animation: tveFadeIn 0.4s ease both;
 }
 
 @layer base {
@@ -70,5 +118,79 @@
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
     }
+  }
+
+  /* Text gradients */
+  .text-gradient-blue {
+    background: linear-gradient(135deg, #2563EB 0%, #60a5fa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-gold {
+    background: linear-gradient(135deg, #F59E0B 0%, #FCD34D 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Card hover lift */
+  .card-lift {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .card-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.12);
+  }
+
+  /* Hero diagonal cut */
+  .clip-diagonal {
+    clip-path: polygon(0 0, 100% 0, 100% 92%, 0 100%);
+  }
+
+  /* Section dot pattern overlay */
+  .dot-pattern {
+    background-image: radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+
+  /* Grid pattern overlay */
+  .grid-pattern {
+    background-image:
+      linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  /* Shimmer for cert badges */
+  .shimmer-bg {
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.15) 50%, transparent 100%);
+    background-size: 200% auto;
+    animation: shimmer 2.5s linear infinite;
+  }
+
+  /* Scroll-triggered fade — initial state */
+  .fade-hidden {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+
+  .fade-visible {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+
+  /* Pulse ring for live indicators */
+  .pulse-ring::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 2px solid currentColor;
+    opacity: 0.4;
+    animation: pulseSlow 2s ease-in-out infinite;
   }
 }
